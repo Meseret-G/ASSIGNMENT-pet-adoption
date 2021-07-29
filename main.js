@@ -210,3 +210,87 @@ const pets = [
       imageUrl: "http://lsae2.iypcdn.com/static//modules/uploads/photos/language1/dino-live-22.jpg?119"
     }
   ];
+
+ 
+//pets array
+//const pets = [""];
+//Display buttons on the DOM
+const renderToDom = (divId , textToPrint) => {
+const selectedDiv = document.querySelector(divId);
+selectedDiv.innerHTML = textToPrint;
+};
+
+//Creates 4 buttons
+const buttons = () => {
+  
+const domString = `
+<button type="button" class="btn btn-primary" id ="allbtn">All</button>
+<button type="button" class="btn btn-secondary id ="catbtn">Cats</button>
+<button type="button" class="btn btn-success id ="dogbtn">Dogs</button>
+<button type="button" class="btn btn-success id ="dinobtn">Dinos</button>`;
+
+renderToDom("#buttonContainer", domString);
+
+};
+
+const petBuilder = (petsArray) => {
+  let domString = "";
+  petsArray.forEach((pet) => {
+    domString += ` <div class="card" style="width: 18rem;">
+    <header> ${pet.name}</header>
+    <img src= "${pet.imageUrl}" class="card-img-top" alt="${pet.name}">
+    <div class="card-body">
+     <p class="card-text">${pet.color}</p>
+      <p class="card-text">${pet.specialSkill}</p>
+      <footer> ${pet.type}</footer>
+    </div>
+  </div>`;
+  });
+
+  renderToDom("#petsContainer", domString)
+} ;
+//filters pets by their type
+/*const filterPets = (array, type) => {
+  return array.filter((petObj) => petObj.type === type);
+};*/
+
+// a function to handle clicks on the buttons
+
+const handleButtonClick = (event) => {
+
+if (event.target.id === "allbtn") {
+  console.log("All Button");
+}
+
+if (event.target.id === "catbtn") {
+  console.log(" Cats Button");
+}
+
+if (event.target.id === "dogbtn") {
+  console.log("Dogs Button");
+} 
+
+if (event.target.id === "dinobtn") {
+  console.log("Dinos Button");
+}
+};
+
+
+//Handles the button events
+const buttonEvents = () => {
+  document.querySelector("#allbtn")
+document.addEventListener('click', handleButtonClick);
+}
+
+  const init = () => {
+
+    buttons();
+    buttonEvents();  
+    petBuilder(pets);
+  }; 
+
+  init();
+
+    
+  
+ 
