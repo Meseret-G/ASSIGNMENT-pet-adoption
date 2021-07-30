@@ -211,9 +211,7 @@ const pets = [
     }
   ];
 
- 
-//pets array
-//const pets = [""];
+
 //Display buttons on the DOM
 const renderToDom = (divId , textToPrint) => {
 const selectedDiv = document.querySelector(divId);
@@ -224,10 +222,10 @@ selectedDiv.innerHTML = textToPrint;
 const buttons = () => {
   
 const domString = `
-<button type="button" class="btn btn-primary" id ="allbtn">All</button>
-<button type="button" class="btn btn-secondary id ="catbtn">Cats</button>
-<button type="button" class="btn btn-success id ="dogbtn">Dogs</button>
-<button type="button" class="btn btn-success id ="dinobtn">Dinos</button>`;
+<button type="button" class="btn btn-primary" id="allbtn">All</button>
+<button type="button" class="btn btn-secondary" id="catbtn">Cats</button>
+<button type="button" class="btn btn-success" id="dogbtn">Dogs</button>
+<button type="button" class="btn btn-success" id="dinobtn">Dinos</button>`;
 
 renderToDom("#buttonContainer", domString);
 
@@ -242,51 +240,64 @@ const petBuilder = (petsArray) => {
     <div class="card-body">
      <p class="card-text">${pet.color}</p>
       <p class="card-text">${pet.specialSkill}</p>
-      <footer> ${pet.type}</footer>
+      <p class="card-text">${pet.type}</p>
     </div>
   </div>`;
   });
 
   renderToDom("#petsContainer", domString)
 } ;
-//filters pets by their type
-/*const filterPets = (array, type) => {
-  return array.filter((petObj) => petObj.type === type);
-};*/
 
-// a function to handle clicks on the buttons
+//filter by pet type
+const filterPets = (array, name) => {
+  return array.filter(petObject => petObject.name === name);
+};
+
+// a function to handle clicks based on the filter conditions for each buttons 
 
 const handleButtonClick = (event) => {
 
 if (event.target.id === "allbtn") {
-  console.log("All Button");
+  petBulider(pets);
+
 }
 
-if (event.target.id === "catbtn") {
-  console.log(" Cats Button");
+ if (event.target.id === "catbtn") {
+  const printCats = filterPets(pets, event.target.id)
+  petBuilder(printCats);
+  
 }
 
-if (event.target.id === "dogbtn") {
-  console.log("Dogs Button");
+else if (event.target.id === "dogbtn") {
+  const printDogs = filterPets(pets, event.target.id)
+  petBuilder(printDogs);
+  
 } 
 
-if (event.target.id === "dinobtn") {
-  console.log("Dinos Button");
+else if (event.target.id === "dinobtn") {
+  const printDinos = filterPets(pets, event.target.id)
+  petBuilder(printDinos);
+
 }
 };
 
 
+
 //Handles the button events
 const buttonEvents = () => {
-  document.querySelector("#allbtn")
-document.addEventListener('click', handleButtonClick);
+  document.querySelector("#buttonContainer")
+.addEventListener("click", handleButtonClick);
 }
 
+
+
+//This starts the app
   const init = () => {
 
     buttons();
-    buttonEvents();  
+    buttonEvents();
     petBuilder(pets);
+  
   }; 
 
   init();
