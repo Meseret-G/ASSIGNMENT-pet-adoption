@@ -295,7 +295,7 @@ const buttonEvents = () => {
   const init = () => {
 
     buttons();
-    
+    buttonEvents();
     petBuilder(pets);
   
   }; 
