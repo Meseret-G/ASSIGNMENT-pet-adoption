@@ -2,14 +2,11 @@ body{
     background-color: aquamarine;
 }
 
-
 #petsContainer, .btnstyle  {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
-
-
 .card {
     border: 8px groove;
     margin-top: 2px;
